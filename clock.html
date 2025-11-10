@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Time & Timer</title>
+    <style>
+      body {
+        background-color: #000;
+        color: #00ff99;
+        font-family: monospace;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      #clock,
+      #timer {
+        font-size: 4rem;
+      }
+      #timer {
+        color: #ffcc00;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="clock"></div>
+    <div id="timer"></div>
+
+    <script>
+      // Function to update real time clock
+      function updateClock() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        document.getElementById("clock").textContent = timeString;
+      }
+
+      // Timer function (counts minutes since page load)
+      let startTime = Date.now();
+      function updateTimer() {
+        const elapsedMs = Date.now() - startTime;
+        const elapsedMinutes = Math.floor(elapsedMs / 60000);
+        const elapsedSeconds = Math.floor((elapsedMs % 60000) / 1000);
+        document.getElementById(
+          "timer"
+        ).textContent = `Timer: ${elapsedMinutes} min ${elapsedSeconds} sec`;
+      }
+
+      // Update both every second
+      setInterval(() => {
+        updateClock();
+        updateTimer();
+      }, 1000);
+
+      updateClock();
+      updateTimer();
+    </script>
+  </body>
+</html>
